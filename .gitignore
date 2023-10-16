@@ -1,0 +1,4 @@
+account_details.json
+bin/*
+lib/*
+pyvenv.cfg
