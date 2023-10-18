@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import requests
 import json
+import mongo_repository
 
 credentials_file = open("account_details.json")
 credentials = json.load(credentials_file)
