@@ -30,11 +30,3 @@ class Database(object):
     def insert_user(self, user: User):
         self.db["users"].insert_one(user.__dict__)
 
-db = Database()
-
-bob_to_insert = User(username="bob", user_id="u1234", user_secret="SECRET", phone_number="+42069")
-db.insert_user(bob_to_insert) # This will only work once, because the fields must be unique
-
-bob_from_db = db.get_user(dict({"username": "bob"}))
-print(bob_from_db)
-
