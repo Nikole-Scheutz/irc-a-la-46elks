@@ -25,8 +25,8 @@ def send_sms(sender: dict, receiver: dict, message: str):
 
 db = mongo_repository.Database()
 
-server = db.get_user_by_username("server")
-user1 = db.get_user_by_username("testing")
+server = db.get_user_by_username("server") # Find server "user" in database
+client_user = db.get_user_by_username("nikole") # Find client with username "nikole"
 
-send_sms(server, user1, "HELLO THERE")
+send_sms(server, client_user, "HELLO THERE") # Sends an SMS from server to the client
 

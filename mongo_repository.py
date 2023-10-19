@@ -40,5 +40,9 @@ class Database(object):
     def insert_user(self, user: User):
         self.db["users"].insert_one(user.__dict__)
 
-    def edit_user(self, user_to_edit: User, new_user: User):
-        pass
+    def edit_user(self, username: str, values: dict):
+        new_values = { "$set": values }
+        self.user_column.update_one({ "username": username }, new_values)
+        return self.get_user_by_username(username)
+
+
