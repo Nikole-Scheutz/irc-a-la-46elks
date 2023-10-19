@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import requests
-import mongo_repository
+from mongo_repository import User, Database
 
 def send_sms(sender: dict, receiver: dict, message: str):
     sender_user_id = sender.get("user_id")
@@ -23,10 +23,20 @@ def send_sms(sender: dict, receiver: dict, message: str):
             )
     print(response)
 
-db = mongo_repository.Database()
+db = Database()
 
 server = db.get_user_by_username("server") # Find server "user" in database
 client_user = db.get_user_by_username("nikole") # Find client with username "nikole"
 
-send_sms(server, client_user, "HELLO THERE") # Sends an SMS from server to the client
+new_user = User(
+        username = "new_user",
+        phone_number = "+46xxx"
+        )
+
+db.insert_user(new_user)
+print(db.get_user_by_username("new_user"))
+db.delete_user("new_user")
+print(db.get_user_by_username("new_user"))
+
+#send_sms(server, client_user, "HELLO THERE") # Sends an SMS from server to the client
 
