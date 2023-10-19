@@ -31,10 +31,10 @@ class Database(object):
             raise Exception(f"User with user_id: {user_id} not found")
         return user
 
-    def get_user_by_telephone_number(self, telephone_number: str):
-        user = self.user_column.find_one({ "telephone_number": telephone_number })
+    def get_user_by_phone_number(self, phone_number: str):
+        user = self.user_column.find_one({ "phone_number": phone_number })
         if not user:
-            raise Exception(f"User with telephone_number: {telephone_number} not found")
+            raise Exception(f"User with phone_number: {phone_number} not found")
         return user
 
     def insert_user(self, user: User):
