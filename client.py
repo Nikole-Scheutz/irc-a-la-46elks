@@ -1,21 +1,26 @@
 #!/usr/bin/python3
-import socket
-import sys
+# This is a test script that receives incoming SMS and creates an entry in Airtable
+# Installation instructions in the link below
+# https://airtable-python-wrapper.readthedocs.io/en/master/
 
-host = "176.10.154.198"
-port = 5500
+from bottle import request, post, run
+import requests
 
-soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+def post_to_airtable(message, recipient, sender, created):
+  airtable.insert({
+    'Date': str(created),
+    'To':str(recipient),
+    'From': str(sender),
+    'Message': str(message)
+  })
+  return "Success"
 
-try:
-    soc.bind((host, port))
-except socket.error as error:
-    print(f"Bind failed. error code: {error}")
-    sys.exit()
-
-print("Socket bound...")
-
-soc.listen(9)
-
-conn, address = soc.accept()
-print(f"Connected with {address[0]}:{address[1]}")
+@post('/smsDemo')
+def sms():
+  message = request.forms.get("message")
+  recipient = request.forms.get("to")
+  sender = request.forms.get("from")
+  created = request.forms.get("created")
+  send_sms(message, recipient, sender, created)
+   
+run(host='0.0.0.0', port=5501, reloader = True, quiet=True)
