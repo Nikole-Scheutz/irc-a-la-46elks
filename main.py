@@ -3,9 +3,6 @@ import requests
 import mongo_repository
 
 class Server(object):
-    def __init__(self, db: mongo_repository.Database):
-        self.db = db
-
     def send_sms(self, sender: dict, receiver: dict, message: str):
         sender_user_id = sender["user_id"]
         sender_secret = sender["user_secret"]
@@ -25,7 +22,9 @@ class Server(object):
         print(response)
 
 db = mongo_repository.Database()
-server = Server(db)
-testing = server.db.get_user_by_username("testing")
-testing2 = server.db.get_user_by_username("testing2")
-server.send_sms(testing2, testing, "HELLO THERE")
+server = Server()
+
+user1 = db.get_user_by_username("testing")
+user2 = db.get_user_by_username("testing2")
+server.send_sms(user2, user1, "HELLO THERE")
+
