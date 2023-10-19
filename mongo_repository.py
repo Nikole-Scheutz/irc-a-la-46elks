@@ -40,3 +40,5 @@ class Database(object):
     def insert_user(self, user: User):
         self.db["users"].insert_one(user.__dict__)
 
+    def edit_user(self, user_to_edit: User, new_user: User):
+        pass
