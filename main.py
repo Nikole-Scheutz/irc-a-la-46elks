@@ -28,15 +28,5 @@ db = Database()
 server = db.get_user_by_username("server") # Find server "user" in database
 client_user = db.get_user_by_username("nikole") # Find client with username "nikole"
 
-new_user = User(
-        username = "new_user",
-        phone_number = "+46xxx"
-        )
-
-db.insert_user(new_user)
-print(db.get_user_by_username("new_user"))
-db.delete_user("new_user")
-print(db.get_user_by_username("new_user"))
-
-#send_sms(server, client_user, "HELLO THERE") # Sends an SMS from server to the client
+send_sms(server, client_user, "HELLO THERE") # Sends an SMS from server to the client
 
