@@ -21,12 +21,22 @@ class Database(object):
 
     def get_user_by_username(self, username: str):
         user = self.user_column.find_one({ "username": username })
+        if not user:
+            raise Exception(f"User with username: {username} not found")
         return user
 
-    def get_user(self, query: dict):
-        user = self.user_column.find_one(query)
+    def get_user_by_user_id(self, user_id: str):
+        user = self.user_column.find_one({ "user_id": user_id })
+        if not user:
+            raise Exception(f"User with user_id: {user_id} not found")
         return user
-    
+
+    def get_user_by_telephone_number(self, telephone_number: str):
+        user = self.user_column.find_one({ "telephone_number": telephone_number })
+        if not user:
+            raise Exception(f"User with telephone_number: {telephone_number} not found")
+        return user
+
     def insert_user(self, user: User):
         self.db["users"].insert_one(user.__dict__)
 
