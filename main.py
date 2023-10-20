@@ -36,8 +36,12 @@ client_user = db.get_user_by_username("nikole") # Find client with username "nik
 @post('/sms')
 def sms():
     message = request.forms.message
-    send_sms(server, client_user, message)
+    from_string = request.forms.get("from")
+    print(from_string)
+    sender = db.get_user_by_phone_number(from_string)
+    sender_username = sender.get("username")
 
+    response.body = f"{sender_username}: {message}"
     response.status=200
     return response
 
