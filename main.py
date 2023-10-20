@@ -40,7 +40,7 @@ def sms():
     sender = request.get("from")
     created = request.get("created")
     print(message, sender, recipient, created)
-    send_sms(server, client_user, message)
+    return(server, client_user, message)
 
 host_ip = ""
 host_port = 5501
