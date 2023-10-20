@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 from dataclasses import dataclass
 import pymongo
+from typing import Optional
 
 @dataclass
 class User(object):
     username: str
-    user_id = None | str
-    user_secret = None | str
+    user_id: Optional[str]
+    user_secret: Optional[str]
     phone_number: str
 
 class Database(object):
@@ -51,5 +52,4 @@ class Database(object):
             return self.user_column.delete_one(query)
         except Exception as error:
             print(f"Could not delete user '{username}' due to error: {error}")
-
 
